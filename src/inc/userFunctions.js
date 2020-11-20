@@ -1,7 +1,5 @@
 import { DB } from '../config/db';
 import Utils from '../utils/utils';
-import Sequelize from 'sequelize';
-
 
 const changePasswordSecurity = async (inputPassword, user) => {
     try {

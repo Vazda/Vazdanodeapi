@@ -11,6 +11,10 @@ import AuthService from './services/auth.service';
 import { passportInit } from './services/passport.service';
 import ReinitControllers from './controllers';
 import userRoutes from './routes/user.routes';
+import projectRoutes from './routes/project.routes';
+import projectMembersRoutes from './routes/projectMembers.routes';
+import taskRoutes from './routes/task.routes';
+import widgetRoutes from './routes/widget.routes';
 
 const app = new Express();
 
@@ -18,7 +22,7 @@ const init = async () => {
   app.use(cors());
   const server = http.createServer(app);
   app.use(bodyParser.json({ limit: '20mb' }));
-  app.use(bodyParser.urlencoded({ limit: '20mb', extended: true })); //promjenio sa false na true
+  app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
   app.use(compression());
   app.use(cookieParser());
   await DB.init();
@@ -32,6 +36,10 @@ const init = async () => {
   app.enable('trust proxy');
 
   app.use('/api/v1/users', userRoutes);
+  app.use('/api/v1/projects', projectRoutes);
+  app.use('/api/v1/project-members', projectMembersRoutes);
+  app.use('/api/v1/tasks', taskRoutes);
+  app.use('/api/v1/widgets', widgetRoutes);
   app.use('/test', (req, res) => {
     return res.send({ message: 'Okay' })
   });

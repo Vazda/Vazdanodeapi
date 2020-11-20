@@ -15,12 +15,12 @@ module.exports = function (sequelize, DataTypes = Sequelize) {
       type: DataTypes.STRING(150),
       allowNull: false
     },
-    email: {
+    userEmail: {
       type: DataTypes.STRING(100),
       allowNull: false,
       unique: true
     },
-    password: {
+    userPassword: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
@@ -46,13 +46,22 @@ module.exports = function (sequelize, DataTypes = Sequelize) {
       type: DataTypes.STRING(50),
       allowNull: true,
       defaultValue: 'User'
-    }
-  }, {
-    timestamps: true
-  });
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+  }, {}
+  );
 
   User.prototype.removeSensitiveData = function () {
-    this.userPass = undefined;
+    this.userPassword = undefined;
     this.salt = undefined;
     return this;
   }

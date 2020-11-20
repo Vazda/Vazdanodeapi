@@ -50,7 +50,7 @@ export const passportInit = () => {
     passport.deserializeUser(async function (id, done) {
         const user = await this.user.findOne({
             where: {
-                userID: id
+                id: id
             }
         })
         if (!user) {

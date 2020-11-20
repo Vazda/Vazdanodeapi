@@ -13,8 +13,14 @@ router.route('/all-users')
 router.route('/change-password')
     .put(UserController.changePassword);
 
+router.route('/forgot-password')
+    .post(UserController.forgotPassword);
+
 router.route('/login')
     .post(UserController.login);
+
+router.route('/verify')
+    .get(UserController.verifyAccount);
 
 router.route('/aboutMe')
     .get(AuthService.authUser, UserController.aboutMe);
